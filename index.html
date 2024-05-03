@@ -353,7 +353,7 @@ font-family: Arial, sans-serif;
         var filePath = `C:\\Users\\016608\\Downloads\\${fileName}.docx`;
 
         // Show download attachment link in chat pane
-        var downloadAttachmentLink = `<p>References:</p> <input type="checkbox" name="file" value="Company-Financial-Health-Analysis"><a href="Company-Financial-Health-Analysis.docx" download="${fileName}.docx">${fileName}.docx</a>`;
+        var downloadAttachmentLink = `<p>References:</p> <input type="checkbox" name="file" value="Company-Financial-Health-Analysis"><a href="Company-Financial-Health-Analysis.docx" download="Company-Financial-Health-Analysis.docx">Company-Financial-Health-Analysis.docx</a>`;
         referenceLinks.innerHTML = downloadAttachmentLink;
 
         // Show the chat screen if not already visible
