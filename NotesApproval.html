@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Document</title>
+    <!-- Include Font Awesome library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+	     
+	     #description {
+           margin-bottom: 20px; /* Add space between rich text input and labels */
+         }
+
+	     /* Adjust the margin of the labels associated with the dropdowns */
+        .form-column label {
+         margin-bottom: 10px; /* Add space between labels and dropdowns */
+         }
+		 /* Adjust the margin of the label associated with the Criticality dropdown */
+label[for="criticality"] {
+    margin-bottom: 10px; /* Add space between Criticality label and dropdown */
+}
+
+header h1 {
+    color: #FFFFFF; /* Change the color to #8BC53F */
+}
+label,
+H3,
+button {
+    color: #0a0a1e; /* Change text color to #0a0a1e */
+}
+body{
+font-family: Arial, sans-serif;
+}	
+        
+        h2 {
+            margin-top: 0;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 20px);
+            margin-right: 10px;
+        }
+        .search-icon {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-icon:hover {
+            background-color: #45a049;
+        }
+        .reference-links {
+            margin-top: 20px;
+        }
+        .reference-link {
+            margin-top: 10px;
+        }
+        .attachment {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .attachment a {
+            text-decoration: none;
+            color: #333;
+        }
+        .attachment a:hover {
+            text-decoration: underline;
+        }
+        /* Styles from the first document */
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        input[type="text"],
+        textarea,
+        select {
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        select {
+            width: 100%;
+        }
+        input[type="file"] {
+            margin-bottom: 10px; /* Adjusted space between attachment field and button */
+        }
+        .clear-attachment {
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: #000;
+            margin-top: 5px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #0a0a1e;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            
+        }
+        
+        .subtitle {
+            font-weight: bold;
+            margin-bottom: 16px;
+            text-align: right;
+            font-size: 15px; /* Added font size */
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .form-column {
+            flex-basis: calc(50% - 10px);
+            margin-bottom: 20px;
+        }
+        
+	
+        /* Common styles for both sections */
+        .container {
+            display: flex;
+            height: 80vh; /* Reduced container height */
+             /* Hide overflow of container */
+        }
+        .section {
+            flex: 1; /* Make both sections take equal space */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 20px; /* Add padding to sections */
+        }
+
+       
+/* Styles for the main section */
+.main-section {
+    flex: 0 0 60%; /* Adjusted to occupy 70% of the screen */
+    max-width: 70%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+/* Styles for the chat section */
+.chat-section {
+    flex: 0 0 28%; /* Adjusted to occupy 30% of the screen */
+    max-width: 30%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+/* Ensure content does not overflow */
+.container {
+    display: flex;
+    height: 120vh;
+	 /* Adjusted container height */
+    overflow: hidden; /* Hide overflow */
+}
+.section {
+    overflow: hidden; /* Hide overflow */
+}
+
+
+        
+        .chat-pane {
+            height: calc(100% - 40px); /* Adjusted height for chat pane */
+            /* Other styles for chat pane */
+        }
+
+        /* Styles for the header */
+        .header {
+            background-color: #0a0a1e;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+		/* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 9999;
+        }
+        .popup-content {
+            text-align: center;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #999;
+        }
+		.small-button {
+    padding: 5px 10px;
+    font-size: 12px;
+    width: 90px; /* Set width to auto */
+	height:35px;
+    display: inline-block; /* Make it inline-block to adjust width */
+    text-align: center; /* Center-align text */
+    margin-right: 10px; /* Add margin to separate it from other elements */
+}
+
+    </style>
+</head>
+<body>
+<header class="header">
+
+     <img src="C:/Users/016608/Downloads/Sify.png" alt="Logo" style="width: 100px; height: 60px; margin-right: 10px; float: left;">
+	 <h1>Notes Approval Static Demo</h1>
+     
+
+</header>
+<div class="container">
+    <div class="section main-section">
+        <!-- Your main section content here -->
+        
+
+        <main>
+            <!-- Your form content here -->
+			<div class="subtitle">Note ID : Sify-001</div>
+            <form id="ticketForm" onsubmit="return showSuccessMessage()">
+	        <div class="form-column">
+                <label for="criticality">Criticality:</label>
+                <select id="criticality" name="criticality">
+                    <option value="" selected disabled>Select Criticality</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required>
+       <label for="description">Notes:</label>
+       <div id="description" contenteditable="true" style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; min-height: 100px;"></div>
+<div class="form-row">
+            
+            <div class="form-column">
+                <label for="vertical">Vertical:</label>
+                <select id="vertical" name="vertical" onchange="populateSubvertical()">
+                    <option value="" selected disabled>Select option</option>
+                    <option value="MSME">MSME</option>
+		    <option value="Retail Assets">Retail Assets</option>
+                </select>
+            </div>
+			<div class="form-column">
+                <label for="subvertical">Sub-Vertical:</label>
+                <select id="subvertical" name="subvertical" required onchange="populateRecommenderAndApprover()">
+<!--<option value="" selected disabled>Select option</option>-->
+                </select>
+            </div>
+            <div class="form-column">
+                <label for="recommender">Recommender:</label>
+                <select id="recommender" name="recommender" required readonly>
+<!--<option value="" selected disabled>Select option</option>-->
+                </select>
+            </div>
+            <div class="form-column">
+                <label for="approver">Approver:</label>
+                <select id="approver" name="approver" required readonly>
+<!--<option value="" selected disabled>Select option</option>-->
+                </select>
+            </div>
+
+                    
+        </div>	
+		<div id="selectedFilesContainer">
+  <label id="selectedFilesLabel">Selected Files: </label>
+  <ul id="selectedFilesList"></ul>
+</div>
+	<button onclick="uploadFiles()"type="button" class="small-button">Notes Input </button>
+	
+	</br>
+        <button type="submit">Submit</button>
+		
+    </form>
+
+        </main>
+    </div>
+
+    <div class="section chat-section">
+        <!-- Your chat section content here -->
+        <div class="chat-pane">
+            <!-- Your chat pane content here -->
+			
+			<h3> Copilot   <img src="C:/Users/016608/Downloads/MsCopilotLogoSnip.png" alt="Icon"> </h3>
+       <!-- <div class="search-container">
+            <input type="text" id="searchInput" placeholder="References...">
+            <button class="search-icon" onclick="openDocument()"><i class="fas fa-search"></i></button>
+        </div> -->
+        <div class="reference-links" id="referenceLinks"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Popup -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <p>Note created successfully!</p>
+    </div>
+</div>
+
+<script>
+    
+
+    // Add an event listener for key press events on the subject input field
+    document.getElementById("subject").addEventListener("keypress", function(event) {
+        // Check if the pressed key is the spacebar (keyCode 32)
+        if (event.keyCode === 32) {
+            // Call the function to open the document
+            openDocument();
+        }
+    });
+
+    function openDocument() {
+        var referenceLinks = document.getElementById("referenceLinks");
+
+        // Always download the same file
+        var fileName = "Company-Financial-Health-Analysis";
+        var filePath = `C:\\Users\\016608\\Downloads\\${fileName}.docx`;
+
+        // Show download attachment link in chat pane
+        var downloadAttachmentLink = `<p>References:</p> <input type="checkbox" name="file" value="Company-Financial-Health-Analysis"><a href="file://${filePath}" download="${fileName}.docx">${fileName}.docx</a>`;
+        referenceLinks.innerHTML = downloadAttachmentLink;
+
+        // Show the chat screen if not already visible
+        document.getElementById("chatScreen").style.display = "block";
+    }
+
+    // Function to generate an array of 'count' unique random numbers within range [0, max)
+    function getRandomIndexes(max, count) {
+        var indexes = [];
+        while (indexes.length < count) {
+            var randomIndex = Math.floor(Math.random() * max);
+            if (!indexes.includes(randomIndex)) {
+                indexes.push(randomIndex);
+            }
+        }
+        return indexes;
+    }
+
+    // Function to handle clearing the attachment field
+    function clearAttachment() {
+        document.getElementById('attachment').value = ''; // Clear the file input
+    }
+
+    // Function to show success message popup
+    function showSuccessMessage() {
+        // Show popup
+        document.getElementById('popup').style.display = 'block';
+        return false; // Prevent form submission
+    }
+
+    // Function to close the success message popup
+    function closePopup() {
+        // Close popup
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    // Function to toggle the chat screen visibility
+    function toggleChatScreen() {
+        var chatScreen = document.getElementById("chatScreen");
+        if (chatScreen.style.display === "none") {
+            chatScreen.style.display = "block";
+        } else {
+            chatScreen.style.display = "none";
+        }
+        toggleBotIconPosition();
+    }
+
+    // Function to populate the subvertical dropdown based on the selected vertical
+    function populateSubvertical() {
+        var vertical = document.getElementById("vertical").value;
+        var subverticalSelect = document.getElementById("subvertical");
+
+        // Clear existing options
+        subverticalSelect.innerHTML = "";
+
+        // Add placeholder option
+        var placeholderOption = document.createElement("option");
+        placeholderOption.value = "";
+        placeholderOption.textContent = "Select Subvertical";
+        placeholderOption.disabled = true;
+        placeholderOption.selected = true;
+        subverticalSelect.appendChild(placeholderOption);
+
+        // Populate options based on the selected vertical
+        if (vertical === "MSME") {
+            var options = ["Cluster Finance", "MSME Govt Schemes & Reporting", "MSME Loan Point Operations", "Union MSME First Branches"];
+            options.forEach(function(option) {
+                var optionElement = document.createElement("option");
+                optionElement.value = option;
+                optionElement.textContent = option;
+                subverticalSelect.appendChild(optionElement);
+            });
+        } else if (vertical === "Retail Assets") {
+            var options = ["Education Loans", "Retail Policy & Products", "RLPs, Home & Mortgage Credit", "Vehicle Loans, Other Loans"];
+            options.forEach(function(option) {
+                var optionElement = document.createElement("option");
+                optionElement.value = option;
+                optionElement.textContent = option;
+                subverticalSelect.appendChild(optionElement);
+            });
+        }
+    }
+function populateRecommenderAndApprover() {
+    var subvertical = document.getElementById("subvertical").value;
+    var recommenderSelect = document.getElementById("recommender");
+    var approverSelect = document.getElementById("approver");
+
+    // Clear existing options
+    recommenderSelect.innerHTML = "";
+    approverSelect.innerHTML = "";
+
+    // Add placeholder options
+    var placeholderOption = document.createElement("option");
+    placeholderOption.value = "";
+    placeholderOption.textContent = "Select Recommender";
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    recommenderSelect.appendChild(placeholderOption);
+
+    placeholderOption = document.createElement("option");
+    placeholderOption.value = "";
+    placeholderOption.textContent = "Select Approver";
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    approverSelect.appendChild(placeholderOption);
+
+    // Populate options based on the selected subvertical
+    if (subvertical === "Cluster Finance" || subvertical === "MSME Govt Schemes & Reporting" || subvertical === "MSME Loan Point Operations" || subvertical === "Union MSME First Branches") {
+        var recommenderOption = document.createElement("option");
+        recommenderOption.value = "Annapurna";
+        recommenderOption.textContent = "Annapurna";
+        var approverOption = document.createElement("option");
+        approverOption.value = "Pravin Sharma";
+        approverOption.textContent = "Pravin Sharma";
+        recommenderSelect.appendChild(recommenderOption); 
+        approverSelect.appendChild(approverOption);
+    } else if (subvertical === "Education Loans" || subvertical === "Retail Policy & Products" || subvertical === "RLPs, Home & Mortgage Credit" || subvertical === "Vehicle Loans, Other Loans") {
+        var recommenderOption = document.createElement("option");
+        recommenderOption.value = "Sanjay Narayan";
+        recommenderOption.textContent = "Sanjay Narayan";
+        var approverOption = document.createElement("option");
+        approverOption.value = "Yogendra Singh";
+        approverOption.textContent = "Yogendra Singh";
+        recommenderSelect.appendChild(recommenderOption);
+        approverSelect.appendChild(approverOption);
+    }
+}
+
+//Upload Files
+function uploadFiles() {
+  var checkboxes = document.querySelectorAll('input[type="checkbox"][name="file"]');
+  var selectedFilesList = document.getElementById('selectedFilesList');
+  selectedFilesList.innerHTML = ''; // Clear previous selections
+
+       
+  // Loop through checkboxes
+  checkboxes.forEach(function(checkbox) {
+    if (checkbox.checked) {
+      // If checkbox is checked, add the file to the selected files list
+      var fileName = checkbox.value;
+      var listItem = document.createElement('li');
+      listItem.textContent = fileName;
+      selectedFilesList.appendChild(listItem);
+    }
+  });
+
+  // If no files were selected, display a message
+  if (selectedFilesList.children.length === 0) {
+    var listItem = document.createElement('li');
+    listItem.textContent = 'No files selected';
+    selectedFilesList.appendChild(listItem);
+  }
+}
+
+</script>
+
+</body>
+</html>
